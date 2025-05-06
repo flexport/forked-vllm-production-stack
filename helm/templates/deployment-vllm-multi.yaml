@@ -244,9 +244,7 @@ spec:
           {{- if $modelSpec.chatTemplate }}
           {{- if hasKey $modelSpec "chatTemplateConfigMap" }}
           - name: {{ .Release.Name }}-chat-templates
-            mountPath: {{ $modelSpec.chatTemplate }}
-            subPath: {{ $modelSpec.chatTemplate }}
-          {{- else }}
+            mountPath: /templates          {{- else }}
           - name: vllm-templates
             mountPath: /templates
           {{- end }}
@@ -318,7 +316,7 @@ metadata:
   name: "{{ .Release.Name }}-{{$modelSpec.name}}-chat-templates"
   namespace: "{{ .Release.Namespace }}"
 data:
-  {{ $modelSpec.chatTemplate }}: |-
+  {{ $modelSpec.chatTemplateFile }}: |-
     {{ $modelSpec.chatTemplateConfigMap }}
 {{- end }}
 {{- end }}
