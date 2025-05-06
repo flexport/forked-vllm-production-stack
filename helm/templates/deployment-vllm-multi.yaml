@@ -242,6 +242,11 @@ spec:
           {{- end}}
           {{- end}}
           {{- if $modelSpec.chatTemplate }}
+          {{- if hasKey $modelSpec "chatTemplateConfigMap" }}
+          - name: {{ .Release.Name }}-chat-templates
+            mountPath: {{ $modelSpec.chatTemplate }}
+            subPath: {{ $modelSpec.chatTemplate }}
+          {{- else }}
           - name: vllm-templates
             mountPath: /templates
           {{- end }}
