@@ -250,6 +250,7 @@ spec:
           - name: vllm-templates
             mountPath: /templates
           {{- end }}
+          {{- end }}
           {{- if hasKey $modelSpec "extraVolumeMounts" }}
           {{- toYaml $modelSpec.extraVolumeMounts | nindent 10 }}
           {{- end }}
