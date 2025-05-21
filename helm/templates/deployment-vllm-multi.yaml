@@ -286,7 +286,10 @@ spec:
         {{- if hasKey $modelSpec "extraVolumes" }}
         {{- toYaml $modelSpec.extraVolumes | nindent 8 }}
         {{- end}}
-      {{- if .Values.servingEngineSpec.tolerations }}
+      {{- if hasKey $modelSpec "tolerations" }}
+      tolerations:
+        {{-   toYaml $modelSpec.tolerations | nindent 8 }}
+      {{- else if .Values.servingEngineSpec.tolerations }}
       {{-   with .Values.servingEngineSpec.tolerations }}
       tolerations:
         {{-   toYaml . | nindent 8 }}
